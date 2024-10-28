@@ -3,13 +3,13 @@ import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from '@/app/lib/prisma'
 import {JWT} from 'next-auth/jwt'
-import { NextResponse } from "next/server";
 
 const handler =  NextAuth({
     //configure jwt
     session: {
         strategy:  'jwt',
     },
+    secret: process.env.NEXTAUTH_SECRET,
     //configure Authentication Providers
     providers: [
         GoogleProvider({
