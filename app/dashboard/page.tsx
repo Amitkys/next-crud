@@ -1,6 +1,6 @@
 "use client";
 // pages/index.tsx (or pages/index.js)
-import { useSession, signIn } from 'next-auth/react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const HomePage = () => {
   const { data: session, status } = useSession();
@@ -26,6 +26,7 @@ const HomePage = () => {
       <p>{session.user.image}</p>
       <img src={session.user.image} alt={session.user.name} />
       <p>Email: {session.user.email}</p>
+      <button onClick={() => signOut()}>sign out</button>
     </div>
   );
 };
