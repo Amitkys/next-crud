@@ -1,7 +1,7 @@
-export default function () {
+export default function  () {
     return (
         <div>
-            <p>this is Dashboard page</p>
+            hi
         </div>
     )
 }

@@ -1,27 +1,31 @@
-// middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 export async function middleware(req: NextRequest) {
-    console.log('middleware is working kys')
-  // Get the session token from cookies
-  const sessionToken = req.cookies.get('next-auth.session-token') || req.cookies.get('__Secure-next-auth.session-token');
+  // Get the current URL path
+  const { pathname } = req.nextUrl;
 
-  // Define protected paths
-  const protectedPaths = ['/dashboard', '/profile']; // Add your protected routes here
-  const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedPaths.includes(path);
+  // Define protected routes
+  const protectedRoutes = ['/dashboard'];
 
-  // If no session token is found and the route is protected, redirect to login
-  if (!sessionToken && isProtectedRoute) {
-    return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+  // Check if the user is trying to access a protected route
+  if (protectedRoutes.some(route => pathname.startsWith(route))) {
+    // Get the token from the request
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    // console.log(token)
+
+    // If there's no valid token, redirect the user to the login page
+    if (!token) {
+      const loginUrl = new URL('/api/auth/signin', req.url);
+      return NextResponse.redirect(loginUrl);
+    }
   }
 
-  // Continue with the request if session token exists or the route is not protected
+  // If the user is authenticated or accessing a non-protected route, continue
   return NextResponse.next();
 }
 
-// Config: define which routes are protected by the middleware
+// Specify which paths to run the middleware on (optional)
 export const config = {
-  matcher: ['/dashboard', '/profile'], // Add your protected routes here
+  matcher: ['/dashboard/:path*'], // Apply middleware to /dashboard and its subroutes
 };

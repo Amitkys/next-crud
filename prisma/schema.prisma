@@ -14,13 +14,14 @@ model User {
   email     String   @unique
   image     String?
   createdAt DateTime @default(now())
+  emailVerified DateTime?
   updatedAt DateTime @updatedAt
   accounts  Account[] // Relation with Account model
   todos     Todo[]    // Your existing relation to Todo model
 }
 
 model Account {
-  id                 String  @id @default(cuid())
+  id                 String  @id @default(uuid())
   userId             String
   type               String
   provider           String
@@ -28,8 +29,11 @@ model Account {
   refresh_token      String?
   access_token       String?
   expires_at         Int?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
