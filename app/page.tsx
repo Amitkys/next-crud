@@ -3,6 +3,7 @@ export default function home() {
     <div>
       <h1> this is home page</h1>
       sdff
+      sdfka
     </div>
   )
 }
