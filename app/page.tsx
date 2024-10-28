@@ -1,8 +1,11 @@
-export default function home() {
-  return (
-    <div>
-      <h1>this is home page</h1>
-    </div>
+"use client";
+import { signIn } from "next-auth/react";
 
+
+export default function signInButton() {
+  return (
+    <button onClick={() => signIn('google')}>
+      sing in with google
+    </button>
   )
 }

@@ -24,5 +24,7 @@ model User {
   name  String
   email String  @unique
   image String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   todos Todo[]  // Relation to the Todo model
 }
