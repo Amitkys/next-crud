@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Define protected routes
-  const protectedRoutes = ['/kys'];
+  const protectedRoutes = ['/todos'];
 
   // Check if the user is trying to access a protected route
   if (protectedRoutes.some(route => pathname.startsWith(route))) {
@@ -28,5 +28,5 @@ export async function middleware(req: NextRequest) {
 
 // Specify which paths to run the middleware on (optional)
 export const config = {
-  matcher: ['/kys/:path*'], // Apply middleware to /dashboard and its subroutes
+  matcher: ['/todos/:path*'], // Apply middleware to /dashboard and its subroutes
 };

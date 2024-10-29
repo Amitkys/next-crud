@@ -5,6 +5,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 export function Navbar() {
     const { data: session, status } = useSession();
 
+    if(status === 'loading'){
+        return(
+            <p>loading..</p>
+        )
+    }
+
     if (!session) {
         return (
             <button onClick={() => signIn('google')}>sign in with google</button>
