@@ -10,4 +10,10 @@ export function Navbar() {
             <button onClick={() => signIn('google', { callbackUrl: '/dashboard' })}>sign in with google</button>
         )
     }
+
+    return (
+        <div>
+            <p>Welcome {session?.user.name}</p>
+        </div>
+    )
 }
