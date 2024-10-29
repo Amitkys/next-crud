@@ -7,7 +7,6 @@ export function Navbar() {
     return (
         <div>
             <p> Welcome: {session?.user.name}</p>
-
         </div>
     )
 }
