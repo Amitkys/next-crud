@@ -36,7 +36,7 @@ const handler =  NextAuth({
         },
          async redirect({ url, baseUrl }) {
             // Always redirect to the dashboard after login
-            return `${baseUrl}/dashboard`;
+            return `${baseUrl}/todos`;
         },
 
     },
