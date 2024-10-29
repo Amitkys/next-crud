@@ -6,6 +6,7 @@ const HomePage = () => {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
+
     return <p>Loading...</p>;
   }
 
