@@ -29,5 +29,5 @@ export async function middleware(req: NextRequest) {
 
 // Specify which paths to run the middleware on (optional)
 export const config = {
-  matcher: ['/todos/:path*'], // Apply middleware to /dashboard and its subroutes
+  matcher: ['/todos/:path*'], // Apply middleware to /dashboard and its subroutes..
 };
