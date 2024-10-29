@@ -16,7 +16,8 @@ export async function middleware(req: NextRequest) {
 
     // If there's no valid token, redirect the user to the login page
     if (!token) {
-      const loginUrl = new URL('/api/auth/signin', req.url);
+      // const loginUrl = new URL('/api/auth/signin', req.url);
+      const loginUrl = new URL('/', req.url);
       return NextResponse.redirect(loginUrl);
     }
 
