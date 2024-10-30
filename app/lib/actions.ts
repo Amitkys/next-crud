@@ -13,3 +13,9 @@ export async function createTodo(formData: FormData) {
         }
     });
 }
+
+export async function fetchAllTodo(){
+    return (
+
+    )
+}

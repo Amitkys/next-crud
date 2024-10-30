@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from '@/app/lib/prisma'
 import {JWT} from 'next-auth/jwt'
 
-const handler =  NextAuth({
+const authOptions =  NextAuth({
     //configure jwt
     session: {
         strategy:  'jwt',
@@ -42,4 +42,6 @@ const handler =  NextAuth({
     },
 })
 
-export {handler as GET, handler as POST};
+const handler = NextAuth(authOptions);
+
+export {handler as GET, handler as POST, authOptions};
