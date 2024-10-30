@@ -2,6 +2,7 @@
 import prisma from '@/app/lib/prisma'
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { revalidatePath } from 'next/cache';
 // Define the User and Session types
 interface User {
     id: string;
@@ -51,4 +52,15 @@ export async function fetchAllTodo() {
     });
 
     return todos;
+}
+
+export async function markAsDone(todoId: string){
+    console.log('mark as done is called');
+    await prisma.todo.update({
+        where: {id: todoId},
+        data: {isCompleted: true},
+    });
+
+    // show updated data
+    revalidatePath("/todos");
 }
