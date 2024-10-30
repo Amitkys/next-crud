@@ -55,7 +55,6 @@ export async function fetchAllTodo() {
 }
 
 export async function markAsDone(todoId: string){
-    console.log('mark as done is called');
     await prisma.todo.update({
         where: {id: todoId},
         data: {isCompleted: true},
@@ -63,4 +62,13 @@ export async function markAsDone(todoId: string){
 
     // show updated data
     revalidatePath("/todos");
+}
+
+export async function deleteTodo(todoId: string) {
+    await prisma.todo.delete({
+        where: {id: todoId}
+    });
+
+    // show updated data
+    revalidatePath('/todos');
 }
