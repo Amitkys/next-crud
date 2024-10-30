@@ -1,13 +1,9 @@
-"use client";
-import { signIn } from "next-auth/react";
-import { Navbar } from "@/app/lib/Components/navbar";
+import { ShowAllTodo } from "@/app/lib/Components/ShowAllTodo"
+import { fetchAllTodo } from "@/app/lib/actions"
 
-
-export default function signInButton() {
+export default async function homePage() {
+  const data = await fetchAllTodo();
   return (
-  <div>
-  <h1>this is home page</h1>
-  </div>
-
+    <ShowAllTodo data = {data} />
   )
 }
