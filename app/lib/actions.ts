@@ -19,7 +19,6 @@ interface Session {
 export async function createTodo(formData: FormData) {
     const title = formData.get('title')as string;
     const description = formData.get('description') as string;
-    // const userId = formData.get('userId') as string;
 
     const session = await getServerSession(authOptions);
     if(!session || !session.user){
@@ -37,7 +36,7 @@ export async function createTodo(formData: FormData) {
 }
 
 // Function to fetch all todos for the logged-in user
-export async function fetchAllTodos() {
+export async function fetchAllTodo() {
     const session = await getServerSession(authOptions);
     if(!session || !session.user){
         throw new Error('you must be logged in to view todos');
