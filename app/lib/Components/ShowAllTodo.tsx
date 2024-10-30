@@ -1,9 +1,14 @@
 "use client"
 import { markAsDone } from "@/app/lib/actions";
+import {deleteTodo} from '@/app/lib/actions';
+
 export  function ShowAllTodo({ data }: {data: any[]}) {
 
     const handleMarkAsDone = async (id: string) => {
         await markAsDone(id);
+    }
+    const handleDeleteTodo = async (id: string) => {
+        await deleteTodo(id);
     }
 
     return (
@@ -22,6 +27,7 @@ export  function ShowAllTodo({ data }: {data: any[]}) {
                                 <button onClick={() => handleMarkAsDone(todo.id)}>Mark as Done</button>
                             </div>
                     )}
+                    <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
                     <hr />
                 </div>
             ))}
