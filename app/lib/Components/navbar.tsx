@@ -21,7 +21,7 @@ export function Navbar() {
         <div>
             <span>
                 <p>Welcome {session?.user.name}</p>
-                <p>id: {session?.user.id} </p>
+                {/* <p>id: {session?.user.id} </p> */}
                 <button onClick={() => signOut()}>logout</button>
             </span>
         </div>
