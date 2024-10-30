@@ -1,3 +1,4 @@
+"use client";
 export async function ShowAllTodo({ data }: {data: any[]}) {
     return (
         <div>
