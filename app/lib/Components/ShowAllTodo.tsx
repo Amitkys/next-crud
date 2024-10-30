@@ -6,6 +6,7 @@ export  function ShowAllTodo({ data }: {data: any[]}) {
                 <div key={todo.id}>
                     <h1>Title: {todo.title}</h1>
                     <p>Description: <strong> {todo.description}</strong> </p>
+                    <button>Mark as Done</button>
                     <hr />
                 </div>
             ))}
