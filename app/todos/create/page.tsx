@@ -1,15 +1,15 @@
 "use client";
-import { useState } from "react"
+import React, { useState } from "react"
 import { createTodo } from "@/app/lib/actions"
 export default function () {
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         setLoading(true);
 
         // create a FormData object to pass to the action
-        const formData = new FormData(event.target);
+        const formData = new FormData(event.target as HTMLFormElement);
 
         try {
             await createTodo(formData); // action function
