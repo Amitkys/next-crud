@@ -11,6 +11,12 @@ export  function ShowAllTodo({ data }: {data: any[]}) {
         await deleteTodo(id);
     }
 
+    if(data.length == 0) {
+        return (
+            <p>Todo list is empty</p>
+        )
+    }
+
     return (
         <div>
             {data.map((todo) => (
