@@ -6,8 +6,10 @@ import { createTodo } from "@/app/lib/actions"
 //toast
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/navigation";
 
 export default function () {
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -18,8 +20,13 @@ export default function () {
         const formData = new FormData(event.target as HTMLFormElement);
 
         try {
-            await createTodo(formData); // action function
-            toast.success('Todo list is added');
+            const result = await createTodo(formData); // action function
+            if(result.success) {
+                toast.success(result.message);
+                router.push('/todos');
+            }else{
+                toast.warn(result.message);
+            }
         } catch (error: any) {
             toast.error('Something went wrong!');
         } finally {

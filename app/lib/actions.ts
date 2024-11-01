@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { z } from 'zod'
+import { z, ZodError } from 'zod'
 // define a zod schema
 
 const formSchema = z.object({
@@ -30,36 +30,40 @@ interface Session {
 
 export async function createTodo(formData: FormData) {
     try{
-    const {title, description} = formSchema.parse({
-        title: formData.get('title'),
-        description: formData.get('description'),
-    })
+        const {title, description} = formSchema.parse({
+            title: formData.get('title'),
+            description: formData.get('description'),
+        })
 
-    const session = await getServerSession(authOptions);
-    if(!session || !session.user){
-        throw new Error('you must be logged in to view todos');
-    }
-    const userId = session.user.id;
-
-    // atrificail 5 second delay
-
-    // const dealy = (ms: number) => new Promise(resolve=> setTimeout(resolve, ms));
-    // await dealy(5000);
-
-    await prisma.todo.create({
-        data: {
-            userId,
-            title,
-            description
+        const session = await getServerSession(authOptions);
+        if(!session || !session.user){
+            throw new Error('you must be logged in to view todos');
         }
-    });
+        const userId = session.user.id;
 
+        // atrificail 5 second delay
+
+        // const dealy = (ms: number) => new Promise(resolve=> setTimeout(resolve, ms));
+        // await dealy(5000);
+
+        await prisma.todo.create({
+            data: {
+                userId,
+                title,
+                description
+            }
+        });
+
+        return {success: true, message: 'Todo Created!'}
 
     }catch(error) {
-        throw error
+        if(error instanceof ZodError) {
+            return {success: false, message: error.errors[0].message};
+        }else{
+            return {succss: false, message: 'Failed to create todo'};
+        }
     }
 
-    redirect('/todos');
 }
 
 // Function to fetch all todos for the logged-in user

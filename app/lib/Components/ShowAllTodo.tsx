@@ -1,7 +1,10 @@
 "use client"
 import { markAsDone } from "@/app/lib/actions";
 import {deleteTodo} from '@/app/lib/actions';
+//toast
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export  function ShowAllTodo({ data }: {data: any[]}) {
 

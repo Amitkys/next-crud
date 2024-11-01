@@ -22,7 +22,7 @@ export default function RootLayout({
           <Navbar />
           <hr />
           {children}
-            <ToastContainer transition={Slide} theme="dark" autoClose={2500} />
+            <ToastContainer transition={Slide} theme="dark" autoClose={2500} position="bottom-right" />
         </Providers>
 
       </body>
