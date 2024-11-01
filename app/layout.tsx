@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import {Providers} from '@/app/lib/Components/Providers'
 import {Navbar} from "@/app/lib/Components/navbar";
+import {Slide, ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +22,9 @@ export default function RootLayout({
           <Navbar />
           <hr />
           {children}
+            <ToastContainer transition={Slide} theme="dark" autoClose={3000} />
         </Providers>
+
       </body>
     </html>
   );

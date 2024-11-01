@@ -3,6 +3,10 @@
 "use client";
 import React, { useState } from "react"
 import { createTodo } from "@/app/lib/actions"
+//toast
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function () {
     const [loading, setLoading] = useState(false);
 
@@ -15,6 +19,7 @@ export default function () {
 
         try {
             await createTodo(formData); // action function
+            toast.success('Todo list is added');
         } catch (error: any) {
             console.log('triggered catch block motherfucker............................');
             console.error("Error creating todo:", error.message);

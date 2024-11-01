@@ -45,9 +45,7 @@ export async function createTodo(formData: FormData) {
 
     // const dealy = (ms: number) => new Promise(resolve=> setTimeout(resolve, ms));
     // await dealy(5000);
-
-    throw new Error('not able to insert data');
-
+    
     await prisma.todo.create({
         data: {
             userId,
