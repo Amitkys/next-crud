@@ -21,9 +21,7 @@ export default function () {
             await createTodo(formData); // action function
             toast.success('Todo list is added');
         } catch (error: any) {
-            console.log('triggered catch block motherfucker............................');
-            console.error("Error creating todo:", error.message);
-            throw new Error(error.message)
+            toast.error('Something went wrong!');
         } finally {
             setLoading(false); // Re-enable the button after request
         }
