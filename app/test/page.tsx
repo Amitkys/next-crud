@@ -3,7 +3,7 @@ import React from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function () {
+export default function test() {
     const notify = () => toast.success('Hello');
     return(
         <div>

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/navigation";
 
-export default function () {
+export default function Create() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 

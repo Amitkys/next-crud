@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-export default function (){
+export default function test2(){
     const router = useRouter();
     return (
         <div>
