@@ -1,7 +1,10 @@
-import { authOptions } from "@/app/lib/auth";
-import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth"
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/app/lib/prisma";
+import { JWT } from "next-auth/jwt";
+
 // Define and export authOptions for reuse
-/*
 export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt",
@@ -32,12 +35,3 @@ export const authOptions: NextAuthOptions = {
         },
     },
 };
-*/
-
-// Export the handler for the NextAuth API route
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
-
-
-
-
