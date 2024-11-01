@@ -3,6 +3,7 @@ import prisma from '@/app/lib/prisma'
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 // Define the User and Session types
 interface User {
     id: string;
@@ -34,6 +35,8 @@ export async function createTodo(formData: FormData) {
             description
         }
     });
+
+    redirect('/todos');
 }
 
 // Function to fetch all todos for the logged-in user
