@@ -4,6 +4,14 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { z } from 'zod'
+// define a zod schema
+
+const formSchema = z.object({
+    title: z.string(),
+    description: z.string(),
+
+})
 // Define the User and Session types
 interface User {
     id: string;
@@ -19,8 +27,10 @@ interface Session {
 
 
 export async function createTodo(formData: FormData) {
-    const title = formData.get('title')as string;
-    const description = formData.get('description') as string;
+    const {title, description} = formSchema.parse({
+        title: formData.get('title'),
+        description: formData.get('description'),
+    })
 
     const session = await getServerSession(authOptions);
     if(!session || !session.user){
