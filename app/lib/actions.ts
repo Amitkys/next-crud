@@ -45,7 +45,7 @@ export async function createTodo(formData: FormData) {
 
     // const dealy = (ms: number) => new Promise(resolve=> setTimeout(resolve, ms));
     // await dealy(5000);
-    
+
     await prisma.todo.create({
         data: {
             userId,
@@ -81,20 +81,30 @@ export async function fetchAllTodo() {
 }
 
 export async function markAsDone(todoId: string){
-    await prisma.todo.update({
-        where: {id: todoId},
-        data: {isCompleted: true},
-    });
-
-    // show updated data
-    revalidatePath("/todos");
+    try {
+        await prisma.todo.update({
+            where: { id: todoId },
+            data: { isCompleted: true },
+        });
+        revalidatePath("/todos");
+        return { success: true, message: 'Todo marks as done' };
+    } catch (error) {
+        console.error('Error making todo as done', error);
+        return { success: false, message: 'Failed to mark as done' }
+    }
 }
 
 export async function deleteTodo(todoId: string) {
-    await prisma.todo.delete({
-        where: {id: todoId}
-    });
+    try {
+        await prisma.todo.delete({
+            where: { id: todoId }
+        });
 
-    // show updated data
-    revalidatePath('/todos');
+        // show updated data
+        revalidatePath('/todos');
+        return {success: true, message: 'Deleted'};
+    } catch (error) {
+        console.log('Error While Deleting');
+        return { success: false, message: 'Error while deleting' };
+    }
 }

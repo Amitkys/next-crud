@@ -1,14 +1,26 @@
 "use client"
 import { markAsDone } from "@/app/lib/actions";
 import {deleteTodo} from '@/app/lib/actions';
+import { toast } from "react-toastify";
 
 export  function ShowAllTodo({ data }: {data: any[]}) {
 
     const handleMarkAsDone = async (id: string) => {
-        await markAsDone(id);
+        const result = await markAsDone(id);
+        if(result.success){
+            toast.success(result.message);
+        }else{
+            toast.error(result.message);
+        }
     }
+
     const handleDeleteTodo = async (id: string) => {
-        await deleteTodo(id);
+        const result = await deleteTodo(id);
+        if(result.success){
+            toast.success(result.message);
+        }else{
+            toast.error(result.message);
+        }
     }
 
     if(data.length == 0) {
