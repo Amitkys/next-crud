@@ -1,8 +1,14 @@
-export default function test() {
-    throw new Error('Error in testing page');
-    return (
+"use client";
+import React from "react";
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export default function () {
+    const notify = () => toast.error('Hello');
+    return(
         <div>
-            <h1> this is testing </h1>
+            <button onClick={notify}>Notification</button>
+            <ToastContainer transition={Slide} theme="dark" autoClose={3000} />
         </div>
     )
 }

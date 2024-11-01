@@ -29,6 +29,7 @@ interface Session {
 
 
 export async function createTodo(formData: FormData) {
+    try{
     const {title, description} = formSchema.parse({
         title: formData.get('title'),
         description: formData.get('description'),
@@ -45,6 +46,8 @@ export async function createTodo(formData: FormData) {
     // const dealy = (ms: number) => new Promise(resolve=> setTimeout(resolve, ms));
     // await dealy(5000);
 
+    throw new Error('not able to insert data');
+
     await prisma.todo.create({
         data: {
             userId,
@@ -52,6 +55,11 @@ export async function createTodo(formData: FormData) {
             description
         }
     });
+
+
+    }catch(error) {
+        throw error
+    }
 
     redirect('/todos');
 }

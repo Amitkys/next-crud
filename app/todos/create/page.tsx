@@ -1,3 +1,5 @@
+
+// app/todos/create/page.tsx
 "use client";
 import React, { useState } from "react"
 import { createTodo } from "@/app/lib/actions"
@@ -13,15 +15,17 @@ export default function () {
 
         try {
             await createTodo(formData); // action function
-        } catch (error) {
-            console.error("Error creating todo:", error);
+        } catch (error: any) {
+            console.log('triggered catch block motherfucker............................');
+            console.error("Error creating todo:", error.message);
+            throw new Error(error.message)
         } finally {
             setLoading(false); // Re-enable the button after request
         }
     }
     return (
         <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} method="POST">
             <label htmlFor="title">Title</label>
             <input type="text" name="title" /> <br />
             <label htmlFor="description">Description</label>
