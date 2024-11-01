@@ -8,9 +8,11 @@ import { z } from 'zod'
 // define a zod schema
 
 const formSchema = z.object({
-    title: z.string(),
+    title: z
+        .string()
+        .min(3, {message: "Title is too short"})
+        .max(50, {message: "Titile is too long"}),
     description: z.string(),
-
 })
 // Define the User and Session types
 interface User {
