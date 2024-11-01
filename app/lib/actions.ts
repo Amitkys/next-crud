@@ -28,6 +28,11 @@ export async function createTodo(formData: FormData) {
     }
     const userId = session.user.id;
 
+    // atrificail 5 second delay
+
+    // const dealy = (ms: number) => new Promise(resolve=> setTimeout(resolve, ms));
+    // await dealy(5000);
+
     await prisma.todo.create({
         data: {
             userId,
