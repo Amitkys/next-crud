@@ -20,7 +20,7 @@ export const authOptions: AuthOptions = {
     callbacks: {
         async jwt({ token, user }: { token: JWT; user?: any }) {
             if (user) {
-                token.id = user.id;
+                token.id = (user as any).id;
             }
             return token;
         },
